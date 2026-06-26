@@ -1,80 +1,77 @@
-# 💻 R3aya Care System API
+# R3aya Care System API: Real-Time Medical Telemetry & Hospital Management Engine
 
 <div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,100:0f172a&height=160&section=header&text=R3aya%20Care%20System%20API&fontSize=42&fontColor=38bdf8&fontFamily=Outfit" width="100%" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,100:0084c7&height=160&section=header&text=R3aya%20Telemetry%20Engine&fontSize=42&fontColor=ffffff&fontFamily=Outfit" width="100%" />
 </div>
 
 <div align="center">
-  ![Node.js](https://img.shields.io/badge/Node.js-v18-green?logo=nodedotjs&style=for-the-badge) ![Express.js](https://img.shields.io/badge/Express.js-v4-black?logo=express&style=for-the-badge) ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+  ![Node.js](https://img.shields.io/badge/Node.js-v18-green?logo=nodedotjs&style=for-the-badge) ![Socket.io](https://img.shields.io/badge/Socket.io-v4-black?logo=socketdotio&style=for-the-badge) ![MongoDB](https://img.shields.io/badge/MongoDB-v6-green?logo=mongodb&style=for-the-badge) ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 </div>
 
----
+خادم **رعاية الطبي** هو محرك سحابي متكامل يعتمد على تقنيات الاتصال ثنائي الاتجاه الفوري (WebSocket) لنقل وتوثيق بيانات مستشعرات EMG الحيوية للمرضى، وتوفير لوحات تحكم طبية فورية للأطباء والمعالجين.
 
-## 📌 Project Overview (Description)
-A robust healthcare management API backend built with Express for patient records and bookings.
-
-This codebase represents professional software development practices, clean module organization, and efficient code architectures tailored for high responsiveness and scalability.
+This repository houses the backend Node.js/Express API, real-time WebSocket communication pipelines, and database controllers for the **R3aya Care Telemetry System**. Designed to ensure sub-second latency for critical patient diagnostic streams.
 
 ---
 
-## ⚡ The Engineering Challenge
+## 🧬 Real-Time Telemetry Pipeline
 
-### 🔴 Problem
-Developers building web solutions face difficulties handling state synchronization, styling inconsistencies, and complex configurations that clutter logic and trigger UI slowdowns or connection lifecycle failures.
+The telemetry engine coordinates secure socket sessions and aggregates sensor readings:
 
-### 🟢 Solution
-This project implements:
-* **Separation of Concerns**: Structured module layouts separating design assets from operational logic.
-* **Optimized Rendering**: Efficient script logic and CSS layout variables to maintain lightweight UI paint times.
-* **Structured Coding Standards**: Written using clean semantic patterns ensuring readable code maintainability.
+```mermaid
+graph TD
+    Sensor[EMG Health Sensor Client] -->|Emit 'sensor-data' packet| WS[Socket.io Gateway]
+    WS -->|Token Authentication & Session verification| Auth{JWT Handshake check}
+    Auth -->|Valid| Pipeline[Telemetry Processor]
+    Auth -->|Invalid| Drop[Terminate Socket Session]
+    Pipeline -->|Sub-second event broadcast| Dashboard[Therapist Monitor Dashboard]
+    Pipeline -->|Bulk writes buffer| DB[(MongoDB Aggregations)]
+```
 
 ---
 
-## 🧬 System Architecture
-The internal layout structures are separated logically:
+## 🧬 Core Services & Layouts
+
+1.  **WebSocket Controller (`src/sockets/`)**: Handles connection handshakes, room partitioning (patients vs. therapists), and heartbeat telemetry.
+2.  **Telemetry Aggregations (`src/controllers/telemetry.js`)**: Aggregates raw EMG metrics into historical average trends.
+3.  **Access Control Router (`src/routes/`)**: Secure routes protecting patient metadata via JWT and Role-Based Access Control (RBAC).
+
+---
+
+## 🛠️ Technology Stack & Assets
+
+*   **Runtime Backend**: Node.js and Express.js REST APIs.
+*   **Real-time Pipeline**: Socket.io running full-duplex communication protocols.
+*   **Database Engine**: MongoDB with Mongoose ODM for fast, unstructured data collection.
+*   **Access Protections**: JSON Web Tokens (JWT) verified at handshake level.
+
+---
+
+## 📂 Repository Module Layout
+
 ```text
 r3aya-care-system-api/
-├── css/ or styles/      # Styling engines and layouts
-├── js/ or src/          # Source scripts and business logic
-├── index.html or app.js # Operational entry point
+├── src/
+│   ├── config/          # Database connection details
+│   ├── controllers/     # Health stats controllers and auth logic
+│   ├── models/          # MongoDB schemas (Users, Scans, Records)
+│   ├── routes/          # RESTful endpoint routes
+│   ├── sockets/         # Socket.io event listeners and room configs
+│   └── app.js           # Server initializer
+├── package.json         # Project metadata
 └── README.md            # System documentation
 ```
 
 ---
 
-## 🛠️ Technology Stack
-
-| Technology | Purpose |
-| :--- | :--- |
-| Node.js | Server-side JavaScript runtime |
-| Express | RESTful API server framework |
-
----
-
-## 🚀 Local Developer Setup & Run
-
-### 📋 Prerequisites
-* Modern web browser / Node.js runtime (depending on project stack)
-
-### ⚙️ Quick Start Steps
+## ⚡ Local Setup & Run
 ```bash
-    git clone https://github.com/Sayed-Herzallah/r3aya-care-system-api.git
-    cd r3aya-care-system-api
-    npm install
-    npm run dev
+git clone https://github.com/Sayed-Herzallah/r3aya-care-system-api.git
+cd r3aya-care-system-api
+npm install
+# Set MONGO_URI and JWT_SECRET in config/.env
+npm run dev
 ```
-
----
-
-## 🔮 Future Improvements
-* [ ] Integrate automated unit testing.
-* [ ] Add dynamic dark/light theme switcher.
-* [ ] Improve responsiveness on extra-small mobile screen viewports.
-
----
-
-## 👥 Contributors
-* **Sayed Herzallah** - Lead Developer & Systems Architect
 
 ---
 
