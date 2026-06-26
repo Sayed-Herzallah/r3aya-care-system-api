@@ -5,7 +5,7 @@
 </div>
 
 <div align="center">
-  ![Node.js](https://img.shields.io/badge/Node.js-v18-green?logo=nodedotjs&style=for-the-badge) ![Socket.io](https://img.shields.io/badge/Socket.io-v4-black?logo=socketdotio&style=for-the-badge) ![MongoDB](https://img.shields.io/badge/MongoDB-v6-green?logo=mongodb&style=for-the-badge) ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+  <img src="https://img.shields.io/badge/Node.js-v18-green?logo=nodedotjs&style=for-the-badge" alt="Node.js" /> <img src="https://img.shields.io/badge/Socket.io-v4-black?logo=socketdotio&style=for-the-badge" alt="Socket.io" /> <img src="https://img.shields.io/badge/MongoDB-v6-green?logo=mongodb&style=for-the-badge" alt="MongoDB" /> <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License" />
 </div>
 
 خادم **رعاية الطبي** هو محرك سحابي متكامل يعتمد على تقنيات الاتصال ثنائي الاتجاه الفوري (WebSocket) لنقل وتوثيق بيانات مستشعرات EMG الحيوية للمرضى، وتوفير لوحات تحكم طبية فورية للأطباء والمعالجين.
